@@ -17,6 +17,7 @@ import { CSSTransition } from "react-transition-group";
 
 export const Main = () => {
   const [active, setActive] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
   const [left, setLeft] = useState("-2px");
   const width = 542;
   const height = 339;
@@ -25,10 +26,11 @@ export const Main = () => {
   const products = ["Booster", "Music", "Analytics"];
   const handlerProductClick = (index) => {
     setLoadedImg(false);
+    setActiveTab(index);
 
     setTimeout(() => {
       setActive(index);
-    }, 300);
+    }, 100);
 
     let left = `${index * 33.33333}%`;
     if (index === 0) {
@@ -49,7 +51,7 @@ export const Main = () => {
           <div
             key={i}
             className={classNames("product-item col-4", {
-              active: active === i,
+              active: activeTab === i,
             })}
             onClick={() => handlerProductClick(i)}
           >
@@ -85,7 +87,11 @@ export const Main = () => {
                   loading: !isLoadedImg,
                 })}
               >
-                <div className="loader" style={{ width, height }}></div>
+                <div className="loader" style={{ width, height }}>
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
                 <img src={Border} alt="Duqqy" className="img-border" />
                 <CSSTransition
                   in={active === 0}
