@@ -1,0 +1,35 @@
+.product-switcher
+  position: relative
+  background: #fff
+  border-radius: 52px
+  box-shadow: $shadow
+  width: 303px
+  height: 50px
+  margin-bottom: 64px
+  transform: translateX(12px)
+
+.product-item
+  font-size: 12px
+  text-align: center
+  height: 50px
+  line-height: 50px
+  position: relative
+  z-index: 2
+  transition: color .2s ease-in-out
+  cursor: pointer
+
+  &.active
+    color: $yellow-color
+    cursor: default
+  
+.switch-item
+  position: absolute
+  top: 0
+  left: 0
+  background: #262426
+  width: 33.3333333%
+  height: 50px
+  border-radius: 52px
+  z-index: 1
+  transition: left .2s ease-in-out
+

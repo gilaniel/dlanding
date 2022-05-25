@@ -1,0 +1,59 @@
+.slides-contaiter
+  position: relative
+  text-align: end
+
+.slide-border
+  position: relative
+  transform: translate(20px, 20px)
+
+  img:first-child
+    position: relative
+    z-index: 2
+
+.active-slide
+  position: absolute
+  right: 30px
+  top: 30px
+  transition: opacity 300ms
+  z-index: 3
+
+.back-slide
+  position: absolute
+  bottom: 24px
+  left: 20px
+
+.slider-enter
+  opacity: 0
+
+.slider-enter-done
+  opacity: 1
+
+.slider-exit
+  opacity: 0
+  display: none
+
+.slider-exit-active
+  opacity: 0
+  display: none
+
+.bird
+  position: absolute
+  z-index: 1
+  transition: opacity 300ms
+
+.boost-bird
+  right: 514px
+  top: -80px
+  z-index: 1
+
+.music-bird
+  width: 120px
+  bottom: -31px
+  right: 510px
+  z-index: 4
+
+.ana-bird
+  width: 120px
+  bottom: -40px
+  right: -26px
+  z-index: 4

@@ -1,0 +1,60 @@
+.fp-nav
+  position: fixed
+  left: 31px
+  top: 50%
+  width: 11px
+  transform: translateY(-50%)
+  transition: all .5s ease
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+  &:before
+    content: ''
+    position: absolute
+    left: 50%
+    top: 0
+    bottom: 0
+    background: $base-color
+    width: 1px
+    margin-left: -1px
+    z-index: 1
+    transition: background 1s ease
+
+.fp-nav_item
+  width: 11px
+  height: 11px
+  margin-bottom: 15px
+  transition: margin-top .2s ease
+  cursor: pointer
+  position: relative
+  z-index: 2
+  display: flex
+
+  div
+    width: 5px
+    height: 5px
+    margin: 0 auto
+    background: $base-color
+    border-radius: 50%
+    transition: background 1s ease, width .2s ease, height .2s ease
+
+  &.active 
+    width: 11px
+    height: 11px
+    cursor: default
+
+    & + .fp-nav_item
+      margin-top: 70px
+
+    div
+      width: 11px
+      height: 11px
+
+
+  &:last-child
+    margin-bottom: 0
+    align-items: end
+
+    &.active 
+      margin-top: 70px
