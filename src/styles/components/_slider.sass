@@ -6,33 +6,33 @@
   position: relative
   transform: translate(20px, 20px)
 
-  img:first-child
-    position: relative
-    z-index: 2
+.img-border
+  position: relative
+  z-index: 2
 
 .active-slide
   position: absolute
   right: 30px
   top: 30px
   transition: opacity 300ms
-  z-index: 3
+  z-index: 4
 
 .back-slide
   position: absolute
   bottom: 24px
   left: 20px
 
-.slider-enter
+.bird-enter
   opacity: 0
 
-.slider-enter-done
+.bird-enter-done
   opacity: 1
 
-.slider-exit
+.bird-exit
   opacity: 0
   display: none
 
-.slider-exit-active
+.bird-exit-active
   opacity: 0
   display: none
 
@@ -50,10 +50,22 @@
   width: 120px
   bottom: -31px
   right: 510px
-  z-index: 4
+  z-index: 6
 
 .ana-bird
   width: 120px
   bottom: -40px
   right: -26px
-  z-index: 4
+  z-index: 6
+
+.loader
+  position: absolute
+  top: 30px
+  right: 30px
+  border-radius: 8px
+  background: transparent
+  transition: background .3s ease
+  z-index: 5
+
+.loading .loader
+  background: #fff

@@ -32,7 +32,7 @@ export const Landing = ({ props }) => {
 
       setTimeout(() => {
         setIdle(true);
-      }, 1500);
+      }, 1200);
     }
     // deltaY
   };

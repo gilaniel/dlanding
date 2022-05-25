@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 
 import { Button } from "../components/button";
@@ -18,9 +18,17 @@ import { CSSTransition } from "react-transition-group";
 export const Main = () => {
   const [active, setActive] = useState(0);
   const [left, setLeft] = useState("-2px");
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+  const [isLoadedImg, setLoadedImg] = useState(true);
+  const ref = useRef(null);
   const products = ["Booster", "Music", "Analytics"];
   const handlerProductClick = (index) => {
-    setActive(index);
+    setLoadedImg(false);
+
+    setTimeout(() => {
+      setActive(index);
+    }, 300);
 
     let left = `${index * 33.33333}%`;
     if (index === 0) {
@@ -54,6 +62,14 @@ export const Main = () => {
     );
   };
 
+  useEffect(() => {
+    if (ref.current) {
+      const { width, height } = ref.current;
+      setWidth(width);
+      setHeight(height);
+    }
+  }, [ref]);
+
   return (
     <>
       <div className="container main" data-sal="fade" data-sal-duration="900">
@@ -72,20 +88,35 @@ export const Main = () => {
           <div className="col-7">
             <div className="slides-contaiter">
               <img src={BackSlide} alt="Duqqy" className="back-slide" />
-              <div className="slide-border">
-                <img src={Border} alt="Duqqy" />
+              <div
+                className={classNames("slide-border", {
+                  loading: !isLoadedImg,
+                })}
+              >
+                <div className="loader" style={{ width, height }}></div>
+                <img src={Border} alt="Duqqy" className="img-border" />
                 <CSSTransition
                   in={active === 0}
-                  timeout={100}
+                  timeout={10}
                   classNames="slider"
                   unmountOnExit
                 >
-                  <img src={BoostSlide} alt="Duqqy" className="active-slide" />
+                  <img
+                    ref={ref}
+                    src={BoostSlide}
+                    onLoad={() => {
+                      setTimeout(() => {
+                        setLoadedImg(true);
+                      }, 100);
+                    }}
+                    alt="Duqqy"
+                    className="active-slide"
+                  />
                 </CSSTransition>
                 <CSSTransition
                   in={active === 0}
-                  timeout={100}
-                  classNames="slider"
+                  timeout={10}
+                  classNames="bird"
                   unmountOnExit
                 >
                   <img
@@ -96,16 +127,25 @@ export const Main = () => {
                 </CSSTransition>
                 <CSSTransition
                   in={active === 1}
-                  timeout={100}
+                  timeout={10}
                   classNames="slider"
                   unmountOnExit
                 >
-                  <img src={MusicSlide} alt="Duqqy" className="active-slide" />
+                  <img
+                    src={MusicSlide}
+                    onLoad={() => {
+                      setTimeout(() => {
+                        setLoadedImg(true);
+                      }, 100);
+                    }}
+                    alt="Duqqy"
+                    className="active-slide"
+                  />
                 </CSSTransition>
                 <CSSTransition
                   in={active === 1}
-                  timeout={100}
-                  classNames="slider"
+                  timeout={10}
+                  classNames="bird"
                   unmountOnExit
                 >
                   <img
@@ -116,16 +156,25 @@ export const Main = () => {
                 </CSSTransition>
                 <CSSTransition
                   in={active === 2}
-                  timeout={100}
+                  timeout={10}
                   classNames="slider"
                   unmountOnExit
                 >
-                  <img src={AnaSlide} alt="Duqqy" className="active-slide" />
+                  <img
+                    src={AnaSlide}
+                    onLoad={() => {
+                      setTimeout(() => {
+                        setLoadedImg(true);
+                      }, 100);
+                    }}
+                    alt="Duqqy"
+                    className="active-slide"
+                  />
                 </CSSTransition>
                 <CSSTransition
                   in={active === 2}
-                  timeout={100}
-                  classNames="slider"
+                  timeout={10}
+                  classNames="bird"
                   unmountOnExit
                 >
                   <img src={AnaBird} alt="Duqqy" className="ana-bird bird" />
