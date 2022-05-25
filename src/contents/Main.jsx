@@ -18,8 +18,8 @@ import { CSSTransition } from "react-transition-group";
 export const Main = () => {
   const [active, setActive] = useState(0);
   const [left, setLeft] = useState("-2px");
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
+  const width = 542;
+  const height = 339;
   const [isLoadedImg, setLoadedImg] = useState(true);
   const ref = useRef(null);
   const products = ["Booster", "Music", "Analytics"];
@@ -61,14 +61,6 @@ export const Main = () => {
       </div>
     );
   };
-
-  useEffect(() => {
-    if (ref.current) {
-      const { width, height } = ref.current;
-      setWidth(width);
-      setHeight(height);
-    }
-  }, [ref]);
 
   return (
     <>
