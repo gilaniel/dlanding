@@ -2,28 +2,27 @@
   position: fixed
   left: 31px
   top: 50%
-  width: 11px
+  width: 12px
   transform: translateY(-50%)
   transition: all .5s ease
   display: flex
   flex-direction: column
   justify-content: center
 
-  &:before
-    content: ''
+  .fp-border
     position: absolute
     left: 50%
     top: 0
     bottom: 0
     background: $base-color
     width: 1px
-    transform: translateX(-50%)
+    // transform: translateX(-50%)
     z-index: 1
     transition: background 1s ease
 
 .fp-nav_item
-  width: 11px
-  height: 11px
+  width: 12px
+  height: 12px
   margin-bottom: 15px
   transition: margin-top .2s ease
   cursor: pointer
@@ -40,16 +39,16 @@
     transition: background 1s ease, width .2s ease, height .2s ease
 
   &.active 
-    width: 11px
-    height: 11px
+    width: 12px
+    height: 12px
     cursor: default
 
     & + .fp-nav_item
       margin-top: 70px
 
     div
-      width: 11px
-      height: 11px
+      width: 12px
+      height: 12px
 
 
   &:last-child

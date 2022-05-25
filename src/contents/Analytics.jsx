@@ -14,7 +14,7 @@ export const Analytics = () => {
   return (
     <>
       <div
-        className="container full"
+        className="container full analytics"
         data-sal="fade"
         data-sal-duration="900"
         datdata-sal-delay="900"

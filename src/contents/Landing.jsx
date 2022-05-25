@@ -15,10 +15,16 @@ import { Footer } from "../contents/Footer";
 export const Landing = ({ props }) => {
   let [idle, setIdle] = useState(true);
   let [activeSlide, setActiveSlide] = useState(0);
+  const [touches, setTouches] = useState({
+    touchstart: { y: -1 },
+    touchmove: { y: -1 },
+    direction: "undetermined",
+  });
   const wrapRef = useRef();
   const pages = ["1", "2", "3", "4", "5", "6"];
 
-  const handleWheel = ({ deltaY }) => {
+  const handleWheel = (e) => {
+    const { deltaY } = e;
     if (idle) {
       setIdle(false);
 
@@ -34,7 +40,48 @@ export const Landing = ({ props }) => {
         setIdle(true);
       }, 1200);
     }
-    // deltaY
+  };
+
+  const handleTouch = (e) => {
+    let touch;
+
+    if (typeof e.touches !== "undefined") {
+      touch = e.touches[0];
+
+      switch (e.type) {
+        case "touchstart":
+          setTouches((prev) => ({
+            ...prev,
+            touchstart: {
+              y: touch.pageY,
+            },
+          }));
+          break;
+        case "touchmove":
+          setTouches((prev) => ({
+            ...prev,
+            touchmove: {
+              y: touch.pageY,
+            },
+          }));
+          break;
+        case "touchend":
+          if (touches.touchmove.y > -1) {
+            const dir =
+              touches.touchstart.y < touches.touchmove.y ? "up" : "down";
+
+            if (dir === "down" && activeSlide < pages.length - 1) {
+              setActiveSlide((prev) => prev + 1);
+            }
+
+            if (dir === "up" && activeSlide > 0) {
+              setActiveSlide((prev) => prev - 1);
+            }
+          }
+        default:
+          break;
+      }
+    }
   };
 
   const handleResize = () => {
@@ -98,13 +145,19 @@ export const Landing = ({ props }) => {
   useEffect(() => {
     const body = document.getElementsByTagName("body")[0];
     body.addEventListener("wheel", handleWheel);
+    document.addEventListener("touchstart", handleTouch, false);
+    document.addEventListener("touchmove", handleTouch, false);
+    document.addEventListener("touchend", handleTouch, false);
     window.addEventListener("resize", debounce(handleResize, 150));
 
     return () => {
       body.removeEventListener("wheel", handleWheel);
+      document.removeEventListener("touchstart", handleTouch, false);
+      document.removeEventListener("touchmove", handleTouch, false);
+      document.removeEventListener("touchend", handleTouch, false);
       window.removeEventListener("resize", debounce(handleResize));
     };
-  }, [idle, activeSlide]);
+  }, [idle, activeSlide, touches]);
 
   useEffect(() => {
     changeSlide();
@@ -143,6 +196,7 @@ export const Landing = ({ props }) => {
       </div>
 
       <div className="fp-nav" data-sal="fade" data-sal-duration="300">
+        <div className="fp-border"></div>
         {getNavItems()}
       </div>
     </>
